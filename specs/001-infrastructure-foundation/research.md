@@ -156,3 +156,41 @@ implementation gates, not permission to invent answers.
 - On 2026-11-24, the owner-selected resource-group name
   `rg-compilation-decision-dev-eus2` did not exist in the selected subscription;
   check again before deployment.
+
+## Implementation checks — 2026-11-24
+
+- The owner accepted Document Intelligence F0's two-page limit per analysis request
+  for development. It does not process a complete 20-page PDF in one request. See
+  [Document Intelligence limits](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/service-limits?view=doc-intel-4.0.0).
+- Bicep and parameters compiled. Separate subscription-scoped provider validations for
+  the model, PDF storage, and PostgreSQL returned success, but do not guarantee
+  creation or available capacity. A full provider validation and what-if failed on App
+  Service quota. F1, B1, B2, B3, and S1 preflight attempts failed; regional usage
+  listed zero total regional VMs despite per-SKU limits. See
+  [App Service quota troubleshooting](https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/troubleshoot-non-zone-redundant-quota-requests).
+  At that point deployment was blocked pending quota, complete validation, preview,
+  cost review, and explicit approval.
+- With owner approval, Microsoft.Quota was registered. The CLI quota API lists F1
+  at 10 and Total Regional VMs at 0. An F1 increase to 11 was submitted via CLI,
+  following Microsoft's guidance to request the individual SKU, and succeeded; the
+  regional total became 11. Registration and the request did not deploy resources.
+- Subsequent full provider validation succeeded; what-if showed all 11 intended
+  resources as Create and no diagnostics or deletes. However, the response masked the
+  app's entire `siteConfig` and identity, preventing property-level preview of its
+  endpoint restrictions and identity. The owner approved a limited alternative:
+  inspect those fields in the compiled template and verify them immediately after
+  deployment. What-if did not reveal the masked values. Applied-value verification
+  failure is a deployment failure and must be reported.
+- Immediately before deployment, the approved template and parameter fingerprints
+  matched, provider validation succeeded, and what-if again reported the same 11
+  creates. East US 2 DataZoneStandard Microsoft-Decision-1.1 quota was 0 used of
+  4,500; quota does not guarantee capacity.
+- The initial deployment failed because PostgreSQL `Standard_B1ms` returned
+  `SkuNotAvailable`; the other modules succeeded. The server was reported as dropping
+  after failure. Regional SKU listing and validation were not proof of available
+  capacity. A subsequent isolated PostgreSQL preview with `Standard_B2s` showed two
+  creates and ignored the existing resources. An entire-template retry instead
+  previewed changes to existing resources, including storage properties. The B2s
+  alternative was approved for isolated deployment, which succeeded. Server state,
+  configuration, Entra administrator and absence of firewall rules were verified.
+  See the [infrastructure README](../../infra/README.md) for costs and per-purpose status.

@@ -35,6 +35,12 @@ container is planned.
    replacement risks for storage account/containers and other persistent resources;
    inspect property-level changes and provider behavior. If replacement cannot be ruled
    out, flag uncertainty and block until resolved. Never call an incomplete preview safe.
+   For the initial new-group deployment only, the owner approved an exception to the
+   property-level preview requirement on 2026-11-24: Azure masks the new App Service
+   `siteConfig` and identity, so review their exact compiled template values before
+   deployment and immediately verify their applied values afterward. This does not
+   waive resource-level preview, other property review, or deployment approval.
+   Report a failed or unavailable verification as a failure, not success.
 3. **Cost**: Before approval, report estimated recurring fixed charges plus usage-based
    storage, extraction and model consumption, plus PostgreSQL compute, provisioned
    storage and any optional HA, assumptions, source, currency and time period. Explicitly

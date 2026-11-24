@@ -67,6 +67,10 @@ application logic, or application readiness.
 
 ## Constitution Check
 
+The table below records the original design-time assessment. Subsequent validation
+and deployment outcomes are documented in [research.md](research.md) and the
+[infrastructure README](../../infra/README.md).
+
 | Gate | Before research | After design |
 |---|---|---|
 | Accessible TypeScript frontend, Python proxy, validated API | Not applicable: application is out of scope; required in its future feature. | Same; no frontend or application-to-cloud access is configured. |
@@ -153,6 +157,16 @@ substitute for application health.
 
 ## Owner Decisions and Blockers
 
+- The initial deployment was approved; PostgreSQL B1ms failed with `SkuNotAvailable`.
+  The owner approved an isolated B2s deployment, which succeeded and was verified.
+  Application-dependent checks remain blocked until the application and access exist.
+  The remaining bullets below record the earlier design-time decisions and blockers.
+- On 2026-11-24, the owner approved using the compiled template to review the masked
+  App Service `siteConfig` and identity for the initial new-group deployment, followed
+  by immediate verification of the deployed settings. Azure what-if still previews
+  all resource changes; failure to verify the applied settings is a failure, not
+  application readiness. This is a limited review-gate exception, not a waiver of
+  security or the constitution's deployment preview requirement.
 - Verify remaining East US 2 service capacity, resource-name availability and policy.
 - Identify realistic usage volumes and choose supported development SKUs so costs can be
   estimated, including PostgreSQL compute/storage and any optional high availability.
@@ -170,4 +184,6 @@ substitute for application health.
 
 ## Complexity Tracking
 
-No constitution exception is requested. The model verification gate is blocked, not waived.
+No constitution exception is requested. The earlier model verification gate was
+resolved by target validation and successful deployment; application-specific
+threshold and quality verification remain future work.

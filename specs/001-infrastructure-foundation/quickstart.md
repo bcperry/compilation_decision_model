@@ -1,11 +1,13 @@
 # Quickstart: Review and Future Provisioning
 
-**Current state**: planning only; no infrastructure template exists, the selected
-subscription and East US 2 have preliminary model and quota evidence, but exact model
-Bicep deployment support remains unverified. No deployment is approved, and no resources
-have been provisioned.
-The commands below describe a future workflow after implementation; do not run cloud
-deployment commands as part of planning.
+**Current state**: infrastructure templates exist; provider validation succeeds after an
+App Service quota increase. Azure masks the app configuration in what-if; on 2026-11-24
+the owner approved compiled-template review of those fields, immediate post-deployment
+verification, and the reviewed initial deployment. The initial PostgreSQL B1ms
+deployment failed; the owner then approved an isolated B2s deployment, which
+succeeded and was verified. The other resources are provisioned; application checks
+remain blocked. See the
+[infrastructure README](../../infra/README.md) for commands, evidence, and cost assumptions.
 
 ## Prerequisites and decisions
 
@@ -45,7 +47,8 @@ deployment commands as part of planning.
    subscription-scope what-if against the exact template and parameters, including
    the group and its nested resources. Inspect diagnostics and
    all changes, including deletion/replacement risk of persistent resources. Incomplete
-   or ambiguous results block deployment. See [what-if documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if).
+   or ambiguous results block deployment except for the owner-approved initial
+   masked-field review and immediate verification described above. See [what-if documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if).
 3. Present the owner the full preview and a pricing-calculator estimate with fixed and
    usage-based costs, currency, quantities, assumptions, uncertainty and date. Do not
    claim what-if is a cost estimate.

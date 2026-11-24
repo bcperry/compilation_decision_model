@@ -197,6 +197,13 @@ provisions the resources identified for documents and rules.
   This is an estimate-review ceiling, not an automatic spending cap or alert.
 - Cost estimates assume 2 PDFs per month at 20 pages each, and 500 decision-model calls
   per month at 500 input tokens per call; these are estimates, not enforced limits.
+- For initial development the owner accepts Document Intelligence's F0 two-page
+  analysis limit per request. Full processing of the estimated 20-page PDFs requires
+  a later tier or processing decision; it is not provided by this configuration.
+- For the initial deployment, the owner approved reviewing the compiled App Service
+  configuration and identity where Azure's what-if masks those fields, followed by
+  immediate verification of the deployed settings. This does not waive review of
+  resource changes or permit an unverified result to be reported as successful.
 - Use `rg-compilation-decision-dev-eus2` for the resource group and `cdm-dev` as the
   resource-name prefix, with unique suffixes where required.
 - Use simple project and environment tags; provider and policy validation may identify
