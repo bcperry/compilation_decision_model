@@ -1,6 +1,7 @@
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
-shell commands, and other important information, read the current plan
+shell commands, and other important information, read the current
+[implementation plan](../specs/001-infrastructure-foundation/plan.md).
 <!-- SPECKIT END -->
 
 Follow the [project constitution](../.specify/memory/constitution.md) and its mandatory

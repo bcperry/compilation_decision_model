@@ -41,11 +41,13 @@
   App Service runtime compatibility are verified against current official sources.
   Any non-Microsoft model or deployment deviation has explicit approval.
 - [ ] Bicep covers Document Intelligence, App Service, Foundry, model deployments, and
-  justified supporting resources; validation, change preview, and smoke checks are planned.
-- [ ] A few tests verify changed user outcomes, not coverage or test-count targets;
+  justified supporting resources; validation, change preview, approval and checks are
+  planned. Infrastructure-only deployments verify resource status and report unavailable
+  application checks as blocked; application deployments perform the required checks.
+- [ ] Any tests verify changed user outcomes, not coverage or test-count targets;
   edge cases have a requirement, regression, or material user-risk rationale. Model doubles
   are not evidence of real-model quality; any live evaluations are opt-in.
-- [ ] An independent subagent generates and runs tests using only relevant outcomes,
+- [ ] If tests are used, an independent subagent generates and runs them using only relevant outcomes,
   acceptance criteria, public contracts, commands, and file locations. The implementation
   agent owns production code and fixes; the tester does not modify production code.
 - [ ] Deployment status comes from explicit user confirmation. Before confirmation,
