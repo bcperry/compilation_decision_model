@@ -1,22 +1,18 @@
 <!--
 Sync Impact Report
-Version: 1.0.0
-Modified principles:
-- V. User Outcomes, Simplicity, and Safe Operations: independent test authorship and execution.
-- Development Workflow and Quality Gates: implementation ownership and test handoff.
-Added guidance: Technology and Deployment Constraints: pre-deployment compatibility policy.
+Version: 1.1.0
+Modified guidance: Technology and Deployment Constraints: infrastructure-only deployments
+may defer application checks until the application is deployed.
+Amendment impact: approved by the project owner; no deployed consumers or data
+contracts identified. Infrastructure-only deployments must still validate, preview,
+obtain approval, verify resource status and report blocked application checks. No
+migration or exception is required; application deployments retain all required checks.
 Added sections: None
 Removed sections: None
 Dependent artifacts:
-- ✅ updated: .specify/templates/plan-template.md
-- ✅ updated: .specify/templates/spec-template.md
-- ✅ updated: .specify/templates/tasks-template.md
-- ✅ updated: .github/agents/speckit.tasks.agent.md
-- ✅ updated: .github/agents/speckit.implement.agent.md
-- ✅ updated: .github/agents/speckit.constitution.agent.md
-- ✅ updated: .github/copilot-instructions.md
-- ✅ updated: README.md
-- Reviewed: .specify/templates/commands/*.md (directory absent)
+- Updated: .specify/templates/plan-template.md, .specify/templates/tasks-template.md,
+  specs/001-infrastructure-foundation/spec.md, specs/001-infrastructure-foundation/plan.md,
+  and specs/001-infrastructure-foundation/tasks.md.
 Follow-up TODOs: None in the constitution.
 Planning decisions: model identity and availability, authentication, retention, rule approval,
 localization semantics, and numeric execution budgets must be resolved before implementation.
@@ -142,8 +138,11 @@ documents, submitted text, model prompts, or credentials by default.
 - The specification MUST define authentication, authorization, file and text size limits,
   supported PDF handling, data retention/deletion, and numeric latency and call budgets.
 - Deployment MUST include Bicep validation, change preview, explicit deployment approval,
-  and post-deployment checks for frontend serving, API health, PDF extraction, and model
-  access. This constitution does not authorize resource provisioning or paid service use.
+  and post-deployment checks. Infrastructure-only deployments MUST verify provisioned
+  resource status and explicitly report unavailable application checks as blocked.
+  When application functionality is deployed, post-deployment checks MUST cover frontend
+  serving, API health, PDF extraction, and model access. This constitution does not
+  authorize resource provisioning or paid service use.
 - The project MUST be treated as not deployed until the user explicitly confirms it is
   deployed. Before that confirmation, backward compatibility is NOT a requirement:
   prefer direct changes over compatibility shims, legacy interfaces, or deprecation
@@ -190,4 +189,4 @@ redefinition, MINOR for new principles or materially expanded guidance, and PATC
 non-semantic clarification. Ratification remains the original adoption date; the
 amendment date MUST change in the commit recording an accepted amendment.
 
-**Version**: 1.0.0 | **Ratified**: 2026-11-24 | **Last Amended**: 2026-11-24
+**Version**: 1.1.0 | **Ratified**: 2026-11-24 | **Last Amended**: 2026-11-24

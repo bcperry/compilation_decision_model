@@ -31,7 +31,9 @@ or data contracts require it.
 **Constitution alignment**: Include applicable implementation tasks for PDF rule provenance and activation,
 boolean API validation, same-model binary localization, both-half and original-offset
 handling, contextual/unresolved results, execution limits, accessible UI states, safe
-telemetry, access controls, Bicep validation/change preview, and deployment smoke checks.
+telemetry, access controls, Bicep validation/change preview, and deployment checks.
+Infrastructure-only deployments verify resource status and report unavailable application
+checks as blocked; application deployments perform the required application checks.
 Record model/rule configuration and measured user outcomes for real-model quality claims.
 Select the smallest useful validation set; do not create a test task for every category.
 Prefer simple inline logic, extract shared methods after more than three uses, and avoid
